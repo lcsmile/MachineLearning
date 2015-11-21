@@ -1,22 +1,22 @@
-### Machine Learning Project Writeup
+# Machine Learning Project Writeup
 
 This file is the final write-up for the John Hopkins University Coursera course ‘Practical Machine Learning’. 
 Course link: [https://www.coursera.org/course/predmachlearn]
 
 
 ## Answer to questions:
-# How the model was built: 
+### How the model was built: 
 A Decision Tree model and a Random Forest model are built to predict how people do exercise using devices, after preliminary analysis of the problem and data preprocessing.
 Final model (the Random Forest tree model) will be selected based on the model performance in terms of accuracy and out-of-sample error. 
 
-# Cross-validation:
+### Cross-validation:
 The provided training datasets are partitioned into a sub-training set and a sub-validation set based on 0.75/0.25 split. 10-fold cross validation is applied during model fitting.
 
-# Expected out-of-sample error:
+### Expected out-of-sample error:
 According to the definition, out-of-sample error is the error rate on a new dataset. It is critical in terms of measuring the performance of model. It is used to estimate the model based on data up to and including today. Mathematically, we could use the difference between 1 and the accuracy of the model on validation set. 
 In this case, our out-of-sample error is 25.92% and 0.65% for the Decision Tree and Random Forest model respectively. This indicates the better performance of the Random Forest model.
 
-# Reasons for my choices:
+### Reasons for my choices:
 Since we have a large size of data, we divide the given training dataset into a sub-training and a sub-validation set to measure the performance of the model.
 Our goal is to analyze and predict variable ‘classe’ based on the rest of given variables, which is a categorical variable with 5 levels. Therefore we do not expect the rest of variables are linear or interacting in a linear way. In this case, Random Forests and Decision Tree models are good candidates over other models like linear models. In addition, these models are constructed to deal with high-dimension and large size of data. 
 
@@ -46,14 +46,14 @@ table(training$classe)
 ##5580 3797 3422 3216 3607
 ```
 
-# Data Preprocessing
+### Data Preprocessing
 **Data Cleaning**
 After taking a look at variable names and values in the provided datasets, we noticed that 7 columns (variables) are not necessarily related to ‘classe’. Specifically, column ‘X’ is an index variable; column ‘user_name’, ‘raw_timestamp_part_1’, ‘raw_timestamp_part_2’,’cvtd_timestamp’, ‘new_window’,’num_window’ are not directly contributing to the values of ‘classe’. Therefore we are going to remove these 7 variables.
 At the same time, we are going to remove columns with ‘NA’ values. 
 Now there are 53 columns/variables remaining in both training and testing datasets.
 A bar chart of different levels of ‘classe’ variables below shows the count of each levels of variable ‘classe’. 
 
-![Classe Level Bar Chart](https://github.com/lcsmile/MachineLearning/figures/classe_level.png)
+![Classe Level Bar Chart](/figures/classe_level.png)
 
 ```
 names(training_new)
@@ -85,7 +85,7 @@ dim(subTesting)
 ##[1] 4904   53
 ```
 
-# Data Modeling
+### Data Modeling
 First we are to download the required packages:
 
 ```
@@ -108,7 +108,7 @@ set.seed(1116)
 First we are going to fit the data with a Classification Tree model. A 10-fold cross validation is applied. The result of a tree plot is shown as below. 
 
 
-![Classe Level Bar Chart](https://github.com/lcsmile/MachineLearning/figures/classification_tree.png)
+![Classe Level Bar Chart](/figures/classification_tree.png)
 
 ```
 #decision tree
