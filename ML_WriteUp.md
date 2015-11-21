@@ -26,7 +26,7 @@ Our goal is to analyze and predict variable ‘classe’ based on the rest of given 
 **Background** (quoted from the course assignment website):  
 Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: [http://groupware.les.inf.puc-rio.br/har] (see the section on the Weight Lifting Exercise Dataset). 
 
-**Data source**
+**Data source**  
 Data is provided from [http://groupware.les.inf.puc-rio.br/har]. Training and Testing datasets are downloaded with the following R commands. There are 160 columns and 19622 rows in the original training dataset, 160 columns (exactly the same names) and 20 rows in testing dataset.
 
 ```
@@ -47,7 +47,7 @@ table(training$classe)
 ```
 
 ### Data Preprocessing
-**Data Cleaning**
+**Data Cleaning**  
 After taking a look at variable names and values in the provided datasets, we noticed that 7 columns (variables) are not necessarily related to ‘classe’. Specifically, column ‘X’ is an index variable; column ‘user_name’, ‘raw_timestamp_part_1’, ‘raw_timestamp_part_2’,’cvtd_timestamp’, ‘new_window’,’num_window’ are not directly contributing to the values of ‘classe’. Therefore we are going to remove these 7 variables.
 At the same time, we are going to remove columns with ‘NA’ values. 
 Now there are 53 columns/variables remaining in both training and testing datasets.
@@ -70,7 +70,7 @@ dim(testing_new)
 ###[1] 20 53
 ```
 
-**Data Slicing**
+**Data Slicing**  
 Before fitting a model with the provided data, we have to split the given training datasets in to a new ‘training set’ (75%) and a ‘validation set’ (25%) without replacement. So the new training set contains 14718 records and new validation set contains 4904 records.
 
 ```
@@ -104,8 +104,8 @@ library(rpart)
 set.seed(1116)
 ```
 
-**Model1: Classification Tree**
-First we are going to fit the data with a Classification Tree model. A 10-fold cross validation is applied. The result of a tree plot is shown as below. 
+**Model1: Decision Tree**   
+First we are going to fit the data with a Decision Tree model. A 10-fold cross validation is applied. The result of a tree plot is shown as below. 
 
 
 ![Classe Level Bar Chart](/figures/classification_tree.png)
@@ -165,7 +165,7 @@ confusionMatrix(pred1,subTesting$classe)
 ##[1] 0.2591762
 ```
 
-**Model2: Random Forest:** 
+**Model2: Random Forest:**   
 The second model is using Random Forest algorithm. A 10-fold cross validation is applied.
 
 ```
@@ -239,7 +239,7 @@ out_error_fit2
 ##[1] 0.006525285
 ```
 
-**Model Selection and Predicting for Test Dataset**
+**Model Selection and Predicting for Test Dataset**   
 From the above result, we are going to choose the Random Forest model since it has a higher accuracy and apply it to the test set provided. 
 Note that we already preprocessed the test set in the same way as we did for training set at the beginning. 
 
